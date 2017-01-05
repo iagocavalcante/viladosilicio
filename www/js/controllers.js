@@ -81,8 +81,17 @@ angular.module('starter.controllers', [])
    
 })
 
-.controller('PostCtrl', function($scope, $stateParams, $sce, $http) {
+.controller('PostCtrl', function($scope, $stateParams, $sce, $http, $timeout, $ionicLoading) {
   // we get the postID from $stateParams.postId, the query the api for that post
+  // Setup the loader
+  $ionicLoading.show({
+    content: 'Carregando',
+    animation: 'fade-in',
+    showBackdrop: true,
+    maxWidth: 200,
+    showDelay: 0
+  });
+
   var singlePostApi = 'http://viladosilicio.com.br/wp-json/wp/v2/posts/' + $stateParams.postId + '?_jsonp=JSON_CALLBACK';
  
   $http.jsonp( singlePostApi ).
