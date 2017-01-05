@@ -63,7 +63,7 @@ angular.module('starter.controllers', [])
   });
  
   // You can change this url to experiment with other endpoints
-  var postsApi = 'http://viladosilicio.com.br/wp-json/wp/v2/posts?per_page=16&_jsonp=JSON_CALLBACK';
+  var postsApi = 'http://viladosilicio.com.br/wp-json/wp/v2/posts?per_page=16&_embed&_jsonp=JSON_CALLBACK';
  
   // This should go in a service so we can reuse it
   
