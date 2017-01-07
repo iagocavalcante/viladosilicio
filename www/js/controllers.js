@@ -63,8 +63,8 @@ angular.module('starter.controllers', [])
   });
  
   // You can change this url to experiment with other endpoints
-  var postsApi = 'http://viladosilicio.com.br/wp-json/wp/v2/posts?per_page=16&_embed&_jsonp=JSON_CALLBACK';
- 
+  var postsApi = 'http://viladosilicio.com.br/wp-json/wp/v2/posts?per_page=5&_embed&_jsonp=JSON_CALLBACK';
+  
   // This should go in a service so we can reuse it
   
   $http.jsonp( postsApi ).
@@ -78,7 +78,13 @@ angular.module('starter.controllers', [])
     error(function(data, status, headers, config) {
       console.log( 'Post load error.' );
     });
-   
+  
+  $scope.carregarMais = function(){
+    $http.get('/more-items').success(function(items) {
+      useItems(items);
+      $scope.$broadcast('scroll.infiniteScrollComplete');
+    }); 
+  }
 })
 
 .controller('PostCtrl', function($scope, $stateParams, $sce, $http, $timeout, $ionicLoading) {

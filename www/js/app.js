@@ -6,7 +6,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers'])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, $state) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -19,6 +19,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    var notificationOpenedCallback = function(jsonData) {
+      var postid = jsonData.payload.additionalData.postid;
+      $state.go('app.post', {postId:postid});
+    };
+
+    window.plugins.OneSignal
+      .startInit("71db1e27-ed39-4ebb-96c6-78316efc05b7")
+      .handleNotificationReceived(notificationOpenedCallback)
+      .endInit();
   });
 })
 
