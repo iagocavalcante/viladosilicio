@@ -1,7 +1,7 @@
 {
-  "name": "viladosilicio",
+  "name": "Vila do Silício",
   "version": "1.1.1",
-  "description": "viladosilicio: An Ionic project",
+  "description": "Aplicativo voltado ao ensino e curiosidades de tecnologia.",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
