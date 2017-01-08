@@ -52,7 +52,7 @@ angular.module('starter.controllers', [])
   ];
 })
 
-.controller('PostsCtrl', function($scope, $http,$timeout, $ionicLoading) {
+.controller('PostsCtrl', function($scope, $http,$timeout, $ionicLoading, $state) {
   // Setup the loader
   $ionicLoading.show({
     content: 'Carregando',
@@ -63,31 +63,61 @@ angular.module('starter.controllers', [])
   });
  
   // You can change this url to experiment with other endpoints
-  var postsApi = 'http://viladosilicio.com.br/wp-json/wp/v2/posts?per_page=5&_embed&_jsonp=JSON_CALLBACK';
-  
+  var postsApi = 'http://viladosilicio.com.br/wp-json/wp/v2/posts?per_page=3&_embed&_jsonp=JSON_CALLBACK';
+  var dados = [];
   // This should go in a service so we can reuse it
-  
-  $http.jsonp( postsApi ).
+  var paginaAtual = 2;
+  $http.jsonp(postsApi).
     success(function(data, status, headers, config) {
       $timeout(function () {
         $ionicLoading.hide();
-        $scope.posts = data;
-        console.log( data );
-      }, 5000);
+        for(var i=0; i < data.length; i++){
+            dados.push(data[i]);
+        }
+        $scope.posts = dados;
+      }, 3000);
     }).
     error(function(data, status, headers, config) {
       console.log( 'Post load error.' );
     });
   
   $scope.carregarMais = function(){
-    $http.get('/more-items').success(function(items) {
-      useItems(items);
-      $scope.$broadcast('scroll.infiniteScrollComplete');
+    var postsApiPage = 'http://viladosilicio.com.br/wp-json/wp/v2/posts?per_page=3&page='+paginaAtual+'&_embed&_jsonp=JSON_CALLBACK';
+    $http.jsonp(postsApiPage).success(function(data, status, headers, config) {
+        if(data != null){
+          for(var i=0; i < data.length; i++){
+            dados.push(data[i]);
+          }
+          $scope.posts = dados;
+          paginaAtual += 1;
+          $scope.$broadcast('scroll.infiniteScrollComplete');
+        } else {
+          alert('Não existem mais postagens!');
+        }
+    }).error(function(data, status, headers, config){
+        $scope.$broadcast('scroll.infiniteScrollComplete');
+        console.log( 'Erro: ', data);
     }); 
-  }
+  };
+
+  $scope.doRefresh = function() {
+    $http.jsonp(postsApi).success(function(data, status, headers, config) {
+        $scope.posts = data;
+    }).
+    error(function(data, status, headers, config) {
+      console.log( 'Post load error.' );
+    }).finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  };
+
+  $scope.abrirPost = function(id){
+    $state.go('app.post', {postId: id});
+  };
 })
 
-.controller('PostCtrl', function($scope, $stateParams, $sce, $http, $timeout, $ionicLoading) {
+.controller('PostCtrl', function($scope, $state, $sce, $http, $timeout, $ionicLoading) {
   // we get the postID from $stateParams.postId, the query the api for that post
   // Setup the loader
   $ionicLoading.show({
@@ -98,7 +128,7 @@ angular.module('starter.controllers', [])
     showDelay: 0
   });
 
-  var singlePostApi = 'http://viladosilicio.com.br/wp-json/wp/v2/posts/' + $stateParams.postId + '?_jsonp=JSON_CALLBACK';
+  var singlePostApi = 'http://viladosilicio.com.br/wp-json/wp/v2/posts/' + $state.params.postId + '?_jsonp=JSON_CALLBACK';
  
   $http.jsonp( singlePostApi ).
     success(function(data, status, headers, config) {
