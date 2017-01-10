@@ -4,12 +4,12 @@ Um aplicativo que representa o blog http://viladosilicio.com.br, onde é possív
 
 É um aplicativo simples voltado para estudos e fixação de conhecimento. 
 
-#Versão 0.0.14
+#Versão Alpha 0.0.14
 
 *Criação da página sobre(autor); <br>
 *Formatação e exibição da data de postagem de forma correta.
 
-#Versão 0.0.13 
+#Versão Alpha 0.0.13 
 
 *Otimização do carregamento da tela de Postagens; <br>
 *Quando puxar pra baixo carregar atualizações de novas postagens; <br>
