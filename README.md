@@ -1,6 +1,6 @@
 # Vila do Silício
 
-Um aplicativo que representa o blog http://viladosilicio.com.br, onde é possível visualizar postagens, receber notificações quando houver postagens novas, inteiramnete construído com Ionic 1 + WP REST API + OneSignal. 
+Um aplicativo que representa o blog http://viladosilicio.com.br, onde é possível visualizar postagens, receber notificações quando houver postagens novas, inteiramente construído com Ionic 1 + WP REST API + OneSignal. 
 
 É um aplicativo simples voltado para estudos e fixação de conhecimento. 
 
