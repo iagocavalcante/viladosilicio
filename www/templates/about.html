@@ -1,0 +1,15 @@
+<ion-view view-title="Sobre ">
+	<ion-content>
+	    <div class="list card">
+			<div class="item item-avatar">
+				<img ng-src="{{user.avatar_urls[48]}}">
+				<h2>{{user.name}}</h2>
+				<p ng-show="user.url != ''"><a href="{{user.url}}">{{user.url}}</a></p>
+			</div>
+			<div class="item item-body">
+				<h2 ng-bind-html="post.title.rendered"></h2>
+				<p>{{user.description}}</p>
+			</div>
+		</div>
+	</ion-content>
+</ion-view>

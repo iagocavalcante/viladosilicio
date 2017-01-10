@@ -52,8 +52,36 @@ angular.module('starter.controllers', [])
   ];
 })
 
+.controller('AboutCtrl', function($scope, $stateParams, $http) {
+  var author = 'http://viladosilicio.com.br/wp-json/wp/v2/users/'+$stateParams.authorId+'?_embed&_jsonp=JSON_CALLBACK';
+  $http.jsonp(author).success(function(data, status, headers, config) {
+        $scope.user = data;
+        console.log(data);
+  }).error(function(data, status, headers, config){
+      console.log( 'Erro: ', data);
+  });
+})
+
 .controller('PostsCtrl', function($scope, $http,$timeout, $ionicLoading, $state) {
   // Setup the loader
+
+  function padDateTime(dt) { //Add a preceding zero to months and days < 10
+    return dt < 10 ? "0"+dt : dt;
+  }
+
+  $scope.parseDateServer = function(date){
+    console.log(date);
+    var dateParsed = new Date(Date.parse(date));
+    var dd = padDateTime(dateParsed.getDate());
+    var mm = padDateTime(dateParsed.getMonth()+1);
+    var yyyy = dateParsed.getFullYear();
+    var hrs = padDateTime(dateParsed.getHours());
+    var mins = padDateTime(dateParsed.getMinutes());
+
+    var myDateTimeString = "Publicado "+dd+"/"+mm+"/"+yyyy+" às "+hrs+":"+mins;  
+    return myDateTimeString;  
+  }
+
   $ionicLoading.show({
     content: 'Carregando',
     animation: 'fade-in',
@@ -80,6 +108,10 @@ angular.module('starter.controllers', [])
     error(function(data, status, headers, config) {
       console.log( 'Post load error.' );
     });
+  
+  $scope.aboutAuthor = function(id){
+    $state.go('app.about', {authorId:id});
+  }
   
   $scope.carregarMais = function(){
     var postsApiPage = 'http://viladosilicio.com.br/wp-json/wp/v2/posts?per_page=3&page='+paginaAtual+'&_embed&_jsonp=JSON_CALLBACK';

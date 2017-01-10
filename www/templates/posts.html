@@ -74,10 +74,10 @@
 
 		<div ng-repeat="post in posts" class="list card">
 
-			<div class="item item-avatar">
+			<div ng-click="aboutAuthor({{post.author}})" class="item item-avatar">
 				<img ng-src="{{post._embedded.author[0].avatar_urls[48]}}">
 				<h2>{{post._embedded.author[0].name}}</h2>
-				<p>{{post.date}}</p>
+				<p>{{parseDateServer(post.date)}}</p>
 			</div>
 
 			<div ng-click="abrirPost({{post.id}})" class="item item-body">
