@@ -39,7 +39,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
-    controller: 'AppCtrl'
+    controller: 'MenuCtrl'
   })
 
   .state('app.posts', {
@@ -48,6 +48,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       'menuContent': {
         templateUrl: "templates/posts.html",
         controller: 'PostsCtrl'
+      }
+    }
+  })
+
+  .state('app.postsCategories', {
+    url: "/posts/:idCategoria",
+    views: {
+      'menuContent': {
+        templateUrl: "templates/postsCategories.html",
+        controller: 'PostsCategoriesCtrl'
       }
     }
   })

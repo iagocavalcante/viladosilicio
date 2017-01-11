@@ -1,4 +1,4 @@
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus ng-controller="MenuCtrl" enable-menu-with-back-views="false">
   <ion-side-menu-content>
     <ion-nav-bar class="bar-stable">
       <ion-nav-back-button>
@@ -18,8 +18,8 @@
     </ion-header-bar>
     <ion-content>
       <ion-list>
-        <ion-item menu-close href="#/app/tags">
-          Tags
+        <ion-item ng-repeat="categoria in categorias" menu-close ng-click="listPostCategorie({{categoria.id}})">
+          {{categoria.name}}
         </ion-item>
       </ion-list>
     </ion-content>
