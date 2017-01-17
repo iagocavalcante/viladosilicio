@@ -4,6 +4,10 @@ Um aplicativo que representa o blog http://viladosilicio.com.br, onde é possív
 
 É um aplicativo simples voltado para estudos e fixação de conhecimento. 
 
+##Versão Alpha 0.0.16
+
+- Compartilhamento com as mídias sociais
+
 ##Versão Alpha 0.0.15
 
 - No menu agora são exibidas as categorias;
