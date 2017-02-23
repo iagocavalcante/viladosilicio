@@ -1,0 +1,97 @@
+<ion-view view-title="Posts por Categoria">
+	<ion-content>
+		<ion-refresher
+	   	 	pulling-text="Puxe para atualizar..."
+	    	on-refresh="doRefresh()">
+	  	</ion-refresher>
+	  	<div ng-show="!posts" class="list card">
+
+			<div class="item item-avatar">
+				<img src="http://www.ssengineeringcollege.org/images/student.png">
+				<h2>Carregando...</h2>
+				<p>Carregando...</p>
+			</div>
+
+			<div class="item item-body">
+				<h2 ng-bind-html="">Carregando</h2>
+				<a href="">
+					<img class="full-image" src="http://howtostartyourownonlinebusiness.com/wp-content/uploads/2013/10/Page-Load-Speed.jpg">
+				</a>
+			</div>
+
+		</div>
+
+		<div ng-show="!posts" class="list card">
+
+			<div class="item item-avatar">
+				<img src="http://www.ssengineeringcollege.org/images/student.png">
+				<h2>Carregando...</h2>
+				<p>Carregando...</p>
+			</div>
+
+			<div class="item item-body">
+				<h2 ng-bind-html="">Carregando...</h2>
+				<a href="">
+					<img class="full-image" src="http://howtostartyourownonlinebusiness.com/wp-content/uploads/2013/10/Page-Load-Speed.jpg">
+				</a>
+			</div>
+
+		</div>
+
+		<div ng-show="!posts" class="list card">
+
+			<div class="item item-avatar">
+				<img src="http://www.ssengineeringcollege.org/images/student.png">
+				<h2>Carregando...</h2>
+				<p>Carregando...</p>
+			</div>
+
+			<div class="item item-body">
+				<h2 ng-bind-html="">Carregando</h2>
+				<a href="">
+					<img class="full-image" src="http://howtostartyourownonlinebusiness.com/wp-content/uploads/2013/10/Page-Load-Speed.jpg">
+				</a>
+			</div>
+
+		</div>
+
+		<div ng-show="!posts" class="list card">
+
+			<div class="item item-avatar">
+				<img src="http://www.ssengineeringcollege.org/images/student.png">
+				<h2>Carregando...</h2>
+				<p>Carregando...</p>
+			</div>
+
+			<div class="item item-body">
+				<h2 ng-bind-html="">Carregando...</h2>
+				<a href="">
+					<img class="full-image" src="http://howtostartyourownonlinebusiness.com/wp-content/uploads/2013/10/Page-Load-Speed.jpg">
+				</a>
+			</div>
+
+		</div>
+
+		<div ng-repeat="post in posts" class="list card">
+
+			<div ng-click="aboutAuthor({{post.author}})" class="item item-avatar">
+				<img ng-src="{{post._embedded.author[0].avatar_urls[48]}}">
+				<h2>{{post._embedded.author[0].name}}</h2>
+				<p>{{parseDateServer(post.date)}}</p>
+			</div>
+
+			<div class="item item-body">
+				<div ng-click="abrirPost({{post.id}})" >
+					<h2 ng-bind-html="post.title.rendered"></h2>
+					<img class="full-image" src="{{post.better_featured_image.source_url}}">
+				</div>
+				<button class="button button-calm" ng-click="share('{{post.title.rendered}}', '{{post.better_featured_image.source_url}}', '{{post.link}}')"><i class="ion-android-share-alt"></i></button>
+			</div>
+		</div>
+
+		<ion-infinite-scroll
+    		on-infinite="carregarMais()"
+    		distance="2%">
+  		</ion-infinite-scroll>
+	</ion-content>
+</ion-view>

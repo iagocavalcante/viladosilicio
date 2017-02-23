@@ -1,0 +1,10 @@
+/* Empty. Add your own CSS if you like */
+.item .menu-categorias {
+     font-family: 'Roboto', sans-serif;
+     font-size: 16px ; 
+     color: #000
+}
+
+.card {
+    border-radius: 23px;
+}
